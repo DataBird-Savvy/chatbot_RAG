@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from pydantic import BaseModel
-from datetime import datetime
+from datetime import datetime,timezone
 from typing import List
 import os
 import requests
@@ -63,6 +63,8 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
         access_token = create_access_token(data={"sub": user.username})
         logging.info(f"Access token generated for user: {user.username}")
         return {"access_token": access_token, "token_type": "bearer"}
+    except HTTPException as e:
+        raise e
     except Exception as e:
         logging.error(ChatBotException(e, sys))
         raise HTTPException(status_code=500, detail="Login failed due to server error")
@@ -115,7 +117,7 @@ async def chat(
             session_id=msg.session_id,
             sender="user",
             message=msg.message,
-            timestamp=datetime.utcnow()
+            timestamp = datetime.now(timezone.utc)
         )
         db.add(user_msg)
 
@@ -156,7 +158,7 @@ async def chat(
             session_id=msg.session_id,
             sender="bot",
             message=response,
-            timestamp=datetime.utcnow()
+            timestamp = datetime.now(timezone.utc)
         )
         db.add(bot_msg)
         db.commit()
