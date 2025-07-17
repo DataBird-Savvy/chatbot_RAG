@@ -1,20 +1,27 @@
-# register_user.py
-
-
+from sqlalchemy.orm import Session
 from app.db.db import SessionLocal
 from app.db.models import User
 from app.core.auth import hash_password
 
+def register_user(username: str, password: str):
+    db: Session = SessionLocal()
 
-def create_user(username: str, password: str):
-    db = SessionLocal()
-    hashed_pw = hash_password(password)
-    new_user = User(username=username, hashed_password=hashed_pw)
+    # Check if user already exists
+    existing_user = db.query(User).filter(User.username == username).first()
+    if existing_user:
+        print("❌ User already exists.")
+        return
 
+    # Hash and store user
+    hashed_pwd = hash_password(password)
+    new_user = User(username=username, hashed_password=hashed_pwd)
     db.add(new_user)
     db.commit()
-    db.close()
-    print(f" User '{username}' created successfully.")
+    db.refresh(new_user)
+
+    print(f"✅ User '{username}' registered.")
 
 if __name__ == "__main__":
-    create_user("jiyamary", "mypassword")
+    username = input("Username: ")
+    password = input("Password: ")
+    register_user(username, password)

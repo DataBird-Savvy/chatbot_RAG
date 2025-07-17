@@ -5,3 +5,10 @@ python-jose[cryptography]
 passlib[bcrypt]
 sqlalchemy
 python-multipart
+sentence-transformers 
+chromadb
+PyMuPDF
+requests
+nest-asyncio 
+tornado 
+decorator
