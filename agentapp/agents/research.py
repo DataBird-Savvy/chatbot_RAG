@@ -1,0 +1,54 @@
+from agentapp.processing.embedder import LLMToolkit
+from agentapp.logger import logging
+from agentapp.exception import MultiAgentException
+from agentapp.processing.agent_retrieval import retrieve_context
+
+
+class ResearchAgent:
+    def __init__(self):
+        self.llm = LLMToolkit()
+        logging.info("ResearchAgent initialized.")
+
+    def fetch_documents(self, query: str):
+        logging.info(f"Fetching documents for query: '{query}'")
+
+        try:
+            # Step 1: Fetch documents using LLM
+            llm_docs = self.llm.fetch_llm_research(query)
+            logging.info(f"Fetched {len(llm_docs)} documents from LLM research.")
+            llm_contents = [d["content"] for d in llm_docs]
+
+            # Step 2: Retrieve context from ChromaDB
+            logging.info("Retrieving additional context from vector store.")
+            retrieved_contents = retrieve_context(query)
+            logging.info(f"Retrieved {len(retrieved_contents)} documents from vector store.")
+
+            # Step 3: Combine LLM and retrieved content
+            all_contents = llm_contents + retrieved_contents
+
+            # Step 4: Rerank combined documents
+            logging.info("Running reranker on combined content.")
+            reranked_contents = self.llm.rerank(query, all_contents)
+            logging.info("Reranking complete.")
+
+            # Step 5: Map reranked content back to documents
+            final_docs = []
+            for content in reranked_contents:
+                for d in llm_docs:
+                    if d["content"] == content:
+                        final_docs.append(d)
+                        break
+                else:
+                    # If from ChromaDB, wrap as anonymous retrieved content
+                    final_docs.append({
+                        "title": "Retrieved Context",
+                        "content": content,
+                        "url": ""
+                    })
+
+            logging.info(f"Returning {len(final_docs)} reranked documents.")
+            return final_docs
+
+        except Exception as e:
+            logging.error(f"ResearchAgent: Failed to fetch documents: {e}")
+            raise MultiAgentException(str(e))
