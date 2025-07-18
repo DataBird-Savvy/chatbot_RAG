@@ -1,6 +1,6 @@
 import os
 import pytest
-from app.core.rag_pipeline import extract_text_from_pdf, get_embedding, retrieve_context
+from chatapp.core.rag_retriever import extract_text_from_pdf, get_embedding, retrieve_context
 
 @pytest.mark.skipif(not os.path.exists("doc/TechEase_Customer_Support_Manual.pdf"), reason="PDF file not found")
 def test_extract_text_from_pdf():

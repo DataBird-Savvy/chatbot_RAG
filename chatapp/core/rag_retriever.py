@@ -3,7 +3,7 @@ import requests
 from dotenv import load_dotenv
 import os
 from chromadb import PersistentClient
-from app.logger import logging
+from chatapp.logger import logging
 
 logger = logging.getLogger(__name__)
 

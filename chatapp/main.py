@@ -9,12 +9,12 @@ import requests
 from dotenv import load_dotenv
 import sys
 
-from app.core.auth import authenticate_user, create_access_token, get_user
-from app.db.db import SessionLocal
-from app.db.models import User, ConversationHistory
-from app.core.rag_pipeline import retrieve_context
-from app.logger import logging
-from app.exception import ChatBotException
+from chatapp.core.auth import authenticate_user, create_access_token, get_user
+from chatapp.db.db import SessionLocal
+from chatapp.db.models import User, ConversationHistory
+from chatapp.core.rag_retriever import retrieve_context
+from chatapp.logger import logging
+from chatapp.exception import ChatBotException
 
 
 
@@ -72,7 +72,7 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
 @app.get("/users/me", response_model=UserOut)
 async def read_users_me(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     from jose import JWTError, jwt
-    from app.core.auth import SECRET_KEY, ALGORITHM
+    from chatapp.core.auth import SECRET_KEY, ALGORITHM
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         username: str = payload.get("sub")
@@ -98,7 +98,7 @@ async def chat(
     db: Session = Depends(get_db)
 ):
     from jose import JWTError, jwt
-    from app.core.auth import SECRET_KEY, ALGORITHM
+    from chatapp.core.auth import SECRET_KEY, ALGORITHM
 
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])

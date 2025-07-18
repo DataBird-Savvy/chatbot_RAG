@@ -1,5 +1,5 @@
 
-from app.main import app
+from chatapp.main import app
 from fastapi.testclient import TestClient
 
 def test_health_check():

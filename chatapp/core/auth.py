@@ -1,6 +1,6 @@
 from passlib.context import CryptContext
 from sqlalchemy.orm import Session
-from app.db.models import User
+from chatapp.db.models import User
 from jose import JWTError, jwt
 from datetime import datetime, timedelta,timezone
 

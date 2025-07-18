@@ -1,4 +1,4 @@
-from app.core.rag_pipeline import embed_and_store
+from chatapp.core.rag_retriever import embed_and_store
 import os
 
 pdf_dir = "doc"

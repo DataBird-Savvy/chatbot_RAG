@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey
 from datetime import datetime
-from app.db.db import Base
+from chatapp.db.db import Base
 
 class User(Base):
     __tablename__ = "users"

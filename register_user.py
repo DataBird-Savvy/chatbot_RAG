@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
-from app.db.db import SessionLocal
-from app.db.models import User
-from app.core.auth import hash_password
+from chatapp.db.db import SessionLocal
+from chatapp.db.models import User
+from chatapp.core.auth import hash_password
 
 def register_user(username: str, password: str):
     db: Session = SessionLocal()
