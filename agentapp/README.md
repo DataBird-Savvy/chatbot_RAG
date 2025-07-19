@@ -115,5 +115,5 @@ Using NLP tools to automate clinical note writing cuts doctors' documentation ti
 which may help reduce burnout.
 ```
 
-
+![alt text](image.png)
 
