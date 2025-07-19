@@ -2,6 +2,7 @@ from agentapp.processing.embedder import LLMToolkit
 from agentapp.logger import logging
 from agentapp.exception import MultiAgentException
 from utils.rag_retriever import SupportDocEmbedder
+import sys
 
 
 class ResearchAgent:
@@ -52,4 +53,6 @@ class ResearchAgent:
 
         except Exception as e:
             logging.error(f"ResearchAgent: Failed to fetch documents: {e}")
-            raise MultiAgentException(str(e))
+            
+            raise MultiAgentException("Failed to fetch documents in ResearchAgent", error_detail=sys)
+
