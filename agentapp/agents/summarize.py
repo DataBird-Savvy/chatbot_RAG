@@ -14,8 +14,14 @@ class SummarizationAgent:
 
     def summarize_document(self, text: str) -> str:
         logging.info("SummarizationAgent: Starting document summarization")
+         # ✅ Check input type
+        logging.info(f"🔍 Input type to summarize_document: {type(text)}")
+        logging.info(f"🔍 Input preview: {str(text)[:200]}")  # only print a short preview
 
         try:
+            if not isinstance(text, str):
+                raise ValueError(f"Expected string input, but got {type(text)}")
+
             logging.info("SummarizationAgent: Chunking input text")
             chunks = chunk_text(text, max_tokens=self.max_chunk_size)
             logging.info(f"SummarizationAgent: Total chunks created: {len(chunks)}")
@@ -33,7 +39,7 @@ class SummarizationAgent:
                     summarized_chunks.append("[Summary failed for this chunk]")
 
             if not summarized_chunks:
-                raise MultiAgentException("No chunks could be summarized successfully.")
+                raise MultiAgentException("SummarizationAgent failed", error_detail="All chunks failed")
 
             final_summary = "\n".join(summarized_chunks)
             logging.info("SummarizationAgent: Finished summarizing all chunks")
@@ -41,4 +47,4 @@ class SummarizationAgent:
 
         except Exception as e:
             logging.error(f"SummarizationAgent: Document summarization failed: {e}")
-            raise MultiAgentException(f"SummarizationAgent failed: {e}")
+            raise MultiAgentException("SummarizationAgent failed", error_detail=str(e))
