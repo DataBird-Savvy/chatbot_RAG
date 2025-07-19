@@ -36,6 +36,9 @@ chatapp/
 │   └── models.py                   # User and ConversationHistory ORM models
 ├── logger.py                       # Logging config
 ├── exception.py                    # Custom exception handlers
+├── utils/                         
+│   │                        
+│   └── rag_retriever.py 
 ```
 
 ---
