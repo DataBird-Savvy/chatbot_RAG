@@ -1,27 +1,27 @@
 
 
-# 🤖 FastAPI Chatbot with Retrieval-Augmented Generation (RAG)
+# FastAPI Chatbot with Retrieval-Augmented Generation (RAG)
 
 A secure, intelligent chatbot application built using **FastAPI**, **JWT authentication**, **ChromaDB**, and **UltraSafe LLM APIs**. This system uses **Retrieval-Augmented Generation (RAG)** to answer user queries based on embedded PDF documents.
 
 ---
 
-## 🚀 Features
+## Features
 
 | Feature                  | Description                                                                 |
 |--------------------------|-----------------------------------------------------------------------------|
-| 🔐 JWT Authentication     | Secure login and token-based access for users                               |
-| 💬 Chat Endpoint          | Session-based conversation logging with user/bot roles                      |
-| 📄 PDF Ingestion          | Embeds PDF documents using `usf1-embed` and stores them in ChromaDB         |
-| 🔍 RAG Flow               | Query → Embed → Search ChromaDB → Rerank → Generate LLM Response            |
-| 🔁 Reranking              | Uses `usf1-rerank` to boost most relevant document chunks                    |
-| 🧠 LLM Completion         | Generates smart answers using `usf1-mini` based on retrieved context         |
-| 🧾 Conversation History   | Full chat history stored in a relational DB (SQLite/PostgreSQL)             |
-| 🛠️ Modular Codebase       | Clean structure with reusable components and exception handling              |
+| JWT Authentication     | Secure login and token-based access for users                               |
+| Chat Endpoint          | Session-based conversation logging with user/bot roles                      |
+| PDF Ingestion          | Embeds PDF documents using `usf1-embed` and stores them in ChromaDB         |
+| RAG Flow               | Query → Embed → Search ChromaDB → Rerank → Generate LLM Response            |
+| Reranking              | Uses `usf1-rerank` to boost most relevant document chunks                    |
+| LLM Completion         | Generates smart answers using `usf1-mini` based on retrieved context         |
+| Conversation History   | Full chat history stored in a relational DB (SQLite/PostgreSQL)             |
+| Modular Codebase       | Clean structure with reusable components and exception handling              |
 
 ---
 
-## 📦 Project Structure
+## Project Structure
 
 ```
 
@@ -45,7 +45,7 @@ chatapp/
 
 ---
 
-## 🧪 Example Workflow
+## Example Workflow
 
 1. **Login** and get a token:
 ```http
@@ -83,7 +83,7 @@ Content-Type: application/json
 
 ---
 
-## 🔍 RAG Flow
+## RAG Flow
 
 ```
 User Query
@@ -103,7 +103,7 @@ Return Chat History
 
 ---
 
-## 📁 Setup Instructions
+##  Setup Instructions
 
 1. **Install dependencies**:
 ```bash

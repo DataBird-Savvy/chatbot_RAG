@@ -1,12 +1,12 @@
 
-# 🧠 Multi-Agent Research System
+#  Multi-Agent Research System
 
-## 📝 Overview
+## Overview
 The **Multi-Agent Research System** is a LangGraph-powered, multi-agent pipeline designed to analyze, summarize, critique, and synthesize research papers into a coherent final report. Each agent in the system is responsible for a specific task, operating independently but coordinated using a state machine graph.
 
 ---
 
-## 🧩 Agent Roles
+## Agent Roles
 
 | **Agent**             | **Purpose**                                                                 |
 |-----------------------|------------------------------------------------------------------------------|
@@ -17,7 +17,7 @@ The **Multi-Agent Research System** is a LangGraph-powered, multi-agent pipeline
 
 ---
 
-## ⚙️ Features Summary
+## Features Summary
 
 | **Feature Category**     | **Description**                                                                 |
 |--------------------------|----------------------------------------------------------------------------------|
@@ -29,7 +29,7 @@ The **Multi-Agent Research System** is a LangGraph-powered, multi-agent pipeline
 
 ---
 
-## 🧬 LangGraph Flow
+## LangGraph Flow
 
 ```
 Entry Point (research) → summarize → critic → writer → Final Report
@@ -37,7 +37,7 @@ Entry Point (research) → summarize → critic → writer → Final Report
 
 ---
 
-## 🛠 Technologies Used
+## Technologies Used
 
 | **Technology**       | **Purpose**                                             |
 |----------------------|----------------------------------------------------------|
@@ -51,7 +51,7 @@ Entry Point (research) → summarize → critic → writer → Final Report
 
 ---
 
-## 📊 Performance Summary
+##  Performance Summary
 
 | **Metric**                | **Value**                                                 |
 |---------------------------|-----------------------------------------------------------|
@@ -62,7 +62,7 @@ Entry Point (research) → summarize → critic → writer → Final Report
 
 ---
 
-## 🗂️ Project Structure
+## Project Structure
 
 ```
 agentapp/
