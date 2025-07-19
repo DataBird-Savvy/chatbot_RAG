@@ -14,9 +14,8 @@ class SummarizationAgent:
 
     def summarize_document(self, text: str) -> str:
         logging.info("SummarizationAgent: Starting document summarization")
-         # ✅ Check input type
-        logging.info(f"🔍 Input type to summarize_document: {type(text)}")
-        logging.info(f"🔍 Input preview: {str(text)[:200]}")  # only print a short preview
+        
+        
 
         try:
             if not isinstance(text, str):

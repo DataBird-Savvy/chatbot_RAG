@@ -18,14 +18,14 @@ class LangGraphBuilder:
             sg = StateGraph(state_schema=ResearchState)
             logging.info("Orchestrator: Created StateGraph with schema.")
 
-            # Add class methods as nodes
+           
             sg.add_node("research", self.pipeline.research_node)
             sg.add_node("summarize", self.pipeline.summarize_node)
             sg.add_node("critic", self.pipeline.critic_node)
             sg.add_node("writer", self.pipeline.writer_node)
             logging.info("Orchestrator: Added all pipeline nodes.")
 
-            # Define flow
+           
             sg.set_entry_point("research")
             sg.add_edge("research", "summarize")
             sg.add_edge("summarize", "critic")

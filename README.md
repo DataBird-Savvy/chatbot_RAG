@@ -23,7 +23,7 @@ A dual-system project built with **FastAPI**, **LangGraph**, and **UltraSafe LLM
 * Fully structured logs & unit-tested endpoints
   🡉 **[See ChatApp README](chatapp/README.md)**
 
-### 🤖 **Test B – Research Agent System**
+### **Test B – Research Agent System**
 
 * Research → Summarize → Critique → Synthesize (LangGraph flow)
 * Uses UltraSafe APIs for embeddings, rerank, summarize, and critique
