@@ -9,7 +9,7 @@ def register_user(username: str, password: str):
     # Check if user already exists
     existing_user = db.query(User).filter(User.username == username).first()
     if existing_user:
-        print("❌ User already exists.")
+        print("User already exists.")
         return
 
     # Hash and store user
@@ -19,7 +19,7 @@ def register_user(username: str, password: str):
     db.commit()
     db.refresh(new_user)
 
-    print(f"✅ User '{username}' registered.")
+    print(f"User '{username}' registered.")
 
 if __name__ == "__main__":
     username = input("Username: ")

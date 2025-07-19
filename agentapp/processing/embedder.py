@@ -96,23 +96,7 @@ class LLMToolkit:
             logging.error(f"LLMToolkit: Summarization failed: {e}")
             return "Summarization failed."
 
-    def get_embedding(self, text: str) -> list:
-        logging.info(f"LLMToolkit: generating embedding for input of length {len(text)}")
-
-        payload = {
-            "model": "usf1-embed",
-            "input": text
-        }
-
-        try:
-            response = requests.post(f"{self.base_url}/embed/embeddings", json=payload, headers=HEADERS)
-            response.raise_for_status()
-            logging.info("LLMToolkit: embedding generated successfully")
-            return response.json()["result"]["data"][0]["embedding"]
-        except Exception as e:
-            logging.error(f"LLMToolkit: Embedding failed: {e}")
-            return []
-
+ 
     def rerank(self, query: str, texts: list[str]) -> list[str]:
         logging.info(f"LLMToolkit: reranking {len(texts)} documents against query: '{query}'")
 

@@ -1,12 +1,13 @@
 from agentapp.processing.embedder import LLMToolkit
 from agentapp.logger import logging
 from agentapp.exception import MultiAgentException
-from agentapp.processing.agent_retrieval import retrieve_context
+from utils.rag_retriever import SupportDocEmbedder
 
 
 class ResearchAgent:
     def __init__(self):
         self.llm = LLMToolkit()
+        self.retriever=SupportDocEmbedder()
         logging.info("ResearchAgent initialized.")
 
     def fetch_documents(self, query: str):
@@ -20,7 +21,7 @@ class ResearchAgent:
 
             # Step 2: Retrieve context from ChromaDB
             logging.info("Retrieving additional context from vector store.")
-            retrieved_contents = retrieve_context(query)
+            retrieved_contents = self.retriever.retrieve_context(query)
             logging.info(f"Retrieved {len(retrieved_contents)} documents from vector store.")
 
             # Step 3: Combine LLM and retrieved content

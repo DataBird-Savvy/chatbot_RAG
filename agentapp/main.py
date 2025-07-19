@@ -1,28 +1,38 @@
-
-from agentapp.core.orchestrator import build_langgraph
+from agentapp.core.orchestrator import LangGraphBuilder
 from agentapp.logger import logging
 from agentapp.exception import MultiAgentException
 
-def main():
-    logging.info("Main: Starting LangGraph orchestration...")
 
-    try:
-        graph = build_langgraph()
-        logging.info("Main: LangGraph built successfully.")
+class LangGraphRunner:
+    def __init__(self):
+        self.builder = LangGraphBuilder()
 
-        initial_state = {"query": "AI in healthcare"}
-        logging.info(f"Main: Initial state: {initial_state}")
+    def run(self, query: str):
+        logging.info("LangGraphRunner: Starting orchestration...")
 
-        final_state = graph.invoke(initial_state)
-        logging.info("Main: LangGraph execution completed.")
+        try:
+            # Build the graph
+            graph = self.builder.build()
+            logging.info("LangGraphRunner: Graph built successfully.")
 
-        print("\n=== FINAL REPORT ===\n")
-        print(final_state["report"])
+            # Define initial state
+            initial_state = {"query": query}
+            logging.info(f"LangGraphRunner: Initial state: {initial_state}")
 
-    except MultiAgentException as cbe:
-        logging.error(f"Main: MultiAgentException occurred: {cbe}")
-    except Exception as e:
-        logging.exception(f"Main: Unexpected error occurred: {e}")
+            # Invoke the graph
+            final_state = graph.invoke(initial_state)
+            logging.info("LangGraphRunner: Execution completed.")
+
+            # Display result
+            print("\n=== FINAL REPORT ===\n")
+            print(final_state["report"])
+
+        except MultiAgentException as mae:
+            logging.error(f"LangGraphRunner: MultiAgentException occurred: {mae}")
+        except Exception as e:
+            logging.exception(f"LangGraphRunner: Unexpected error occurred: {e}")
+
 
 if __name__ == "__main__":
-    main()
+    runner = LangGraphRunner()
+    runner.run("AI in healthcare")

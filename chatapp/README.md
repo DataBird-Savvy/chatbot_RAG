@@ -122,9 +122,13 @@ ULTRASAFE_API_KEY=your_ultrasafe_api_key
 python create_table.py
 
 ```
+4. **Register user**
+```
+python register_user.py
 
-4. **Run the app**:
-```bash
+```
+5. **Run the app**:
+```
 uvicorn chatapp.main:app --reload
 ```
 

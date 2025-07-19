@@ -12,7 +12,7 @@ import sys
 from chatapp.core.auth import authenticate_user, create_access_token, get_user
 from chatapp.db.db import SessionLocal
 from chatapp.db.models import User, ConversationHistory
-from chatapp.core.rag_retriever import retrieve_context
+from utils.rag_retriever import SupportDocEmbedder
 from chatapp.logger import logging
 from chatapp.exception import ChatBotException
 
@@ -122,7 +122,8 @@ async def chat(
         db.add(user_msg)
 
         # Retrieve RAG context
-        context_chunks = retrieve_context(msg.message,collection_name="support_collection")
+        support_agent = SupportDocEmbedder(collection_name="support_collection")
+        context_chunks = support_agent.retrieve_context(msg.message)
         context_str = "\n".join(context_chunks)
         logging.info(f"Context retrieved for query: {context_chunks}")
 
