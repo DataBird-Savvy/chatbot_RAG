@@ -3,8 +3,11 @@ from sqlalchemy.orm import Session
 from chatapp.db.models import User
 from jose import JWTError, jwt
 from datetime import datetime, timedelta,timezone
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
-SECRET_KEY = "your-secret-key"
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
